@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 
 const GetCampaign = (campaignId) => {
     const [campaign, setCampaign] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  
 
 
     useEffect(() => {
@@ -15,20 +14,16 @@ const GetCampaign = (campaignId) => {
                 }
 
                 const data = await response.json()
-
                 setCampaign(data);
-                setLoading(false);
-                setError(null);
             }  catch (error) {
-                setError(error);
-                setLoading(false)
+                console.error(``)
             }
         };
 
         fetchCampaign();
     }, [campaignId])
 
-    return [campaign, loading, error ];
+    return [campaign];
 }
 
 export default GetCampaign;

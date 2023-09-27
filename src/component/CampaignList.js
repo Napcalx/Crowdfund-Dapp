@@ -1,8 +1,8 @@
 import React from "react";
-import getCampaign from "../hooks/getCampaign";
+import GetCampaign from "../hooks/GetCampaign";
 
 const campaignList =() => {
-    const campaign = getCampaign();
+    const campaign = GetCampaign();
 
     return (
         <div>

@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { supportedChains } from "../constants";
 
+
 export const isSupportedChain = (chainId) =>
     supportedChains.includes(Number(chainId));
 
@@ -9,3 +10,7 @@ export const shortenAccount = (account) =>
 
 export const getReadOnlyProvider = () =>
     new ethers.JsonRpcProvider("https://goerli.base.org");
+
+export const getContractAt = ( ) => {
+    new ethers.Contract("0x46f44F2D1af04D54ab5BCbEF9F4D0Df9baDc1B8C", getReadOnlyProvider());
+}

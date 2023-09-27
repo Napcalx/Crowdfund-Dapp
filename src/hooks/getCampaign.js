@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import { useConnection } from "../context/connection";
 
-const GetCampaign = (campaignId) => {
+const GetCampaign = () => {
     const [campaign, setCampaign] = useState(null);
+    const { provider, contractAddress } = useConnection();
   
-
-
     useEffect(() => {
         const fetchCampaign = async () => {
             try {
-                const response = await fetch(`/api/campaign/${campaignId}`);
+                const campaign = await ethers.getContractAt(contractAddress, provider);
+                const response = await fetch(`/api/campaign/${campaign}`);
                 if(!response.ok) {
                     throw new Error(`Failed to fetch campaign data: ${response.status}`);
                 }
 
                 const data = await response.json()
-                setCampaign(data);
+                setCampaign(campaign);
             }  catch (error) {
-                console.error(``)
+                console.error(`Error fetching campaign ID ${error}`)
             }
         };
 
         fetchCampaign();
-    }, [campaignId])
+    }, [provider, contractAddress])
 
-    return [campaign];
+    return campaign;
 }
 
 export default GetCampaign;
